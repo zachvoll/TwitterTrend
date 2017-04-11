@@ -1,0 +1,23 @@
+name: Zachary Vollen, Yadu Kiran
+
+
+Purpose of the Program: 
+The Program is designed to service various clients that are listed in an input file that is passed as an argument. To service required by the client is that it requires the three most trending keywords on twitter for a particular city
+
+How to Compile the Program:
+A makefile already specifies the dependencies. Hence, to run the program, simply change the directory in the shell to where the MakeFile is located and type "make". A "make clean" will remove the twitterTrend executable, any objects and any result files located in the working directory.
+
+How to Use the Program from the Shell
+If you want to execute the program, first change the working directory to the one where the executable is located and enter the following command in the shell:
+./twitterTrend <input file> <number of threads>
+Where 
+<input file> is the path of the .in file which contains a list of all the clients that need to be serviced
+<number of threads> is the number of threads that the main program needs to create
+Example: ./twitterTrend client1.in 1
+
+How the Program Works:
+The main program first reads the TwitterDatabase.txt file and stores all the entries from the database into a structure called DataBase. It then reads the .in file specified in the argument and stores the names of all the clients in an array clientPath.. 
+We then spawn the number of threads and point it to a function called pool(). The pool function does what its name implies and pools all threads created till the Queue is full. The main program then calls a function called populate(), whose job is to fill in the queue. 
+We use three semaphores in the program. Semaphore S1 indicates the number of items in the queue and is initialized to 0. Semaphore S2 is incremented when the queue is empty and signals the populate function to add items in the queue. Semaphore S3 indicates the number of clients that are yet to be serviced and is used as a exit condition for the threads. 
+
+We used a Linked List to implement the queue. Semaphore S1 is incremented by the populate() function after elements are added to the queue. The Populate function also waits on S2 before it proceeds to add more items to the queue. The pool function waits on S1, and increments S2 when the queue is empty. The pool function calls a function serviceCLient which writes the result to the result file. Both the populate and pool function recurse. The exit condition for the populate condition is when all the clients are added to the queue. The exit condition for the pool function is when all the clients have been assigned to a thread. When the main program returns from the populate function, it joins all the threads and then finishes execution.
