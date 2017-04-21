@@ -1,13 +1,12 @@
 name: Zachary Vollen, Yadu Kiran
 
-
 Purpose of the Program: 
 The Program is designed to service various clients that are listed in an input file that is passed as an argument. To service required by the client is that it requires the three most trending keywords on twitter for a particular city
 
 How to Compile the Program:
 A makefile already specifies the dependencies. Hence, to run the program, simply change the directory in the shell to where the MakeFile is located and type "make". A "make clean" will remove the twitterTrend executable, any objects and any result files located in the working directory.
 
-How to Use the Program from the Shell
+How to Use the Program from the Shell:
 If you want to execute the program, first change the working directory to the one where the executable is located and enter the following command in the shell:
 ./twitterTrend <input file> <number of threads>
 Where 
